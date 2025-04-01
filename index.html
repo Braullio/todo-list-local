@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+<title>Visualizar Dados</title>
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <h1>Dados Armazenados</h1>
+    
+    <div class="container">
+        <div class="add-container">
+            <h2>Regras</h2>
+            <div class="input-container">
+                <input type="text" id="regras-input" placeholder="Adicionar nova regra">
+                <button onclick="addTask('LIST', 'regras-input', 'regras-list')">Adicionar</button>
+            </div>
+            <ul id="regras-list"></ul>
+        </div>
+
+        <div class="add-container">
+            <h2>Links</h2>
+            <div class="input-container">
+                <input type="text" id="links-input-text" placeholder="Nome do link">
+                <input type="text" id="links-input-url" placeholder="URL do link">
+                <button onclick="addLink()">Adicionar</button>
+            </div>
+            <ul id="links-list"></ul>
+        </div>
+
+        <div class="add-container">
+            <h2>Checkbox</h2>
+            <div class="input-container">
+                <input type="text" id="checkbox-input" placeholder="Nova opção">
+                <button onclick="addCheckbox()">Adicionar</button>
+            </div>
+            <ul id="checkbox-list"></ul>
+        </div>
+    </div>
+
+<script src="script.js"></script>
+</br></br></br></br>
+</body>
+</html>
