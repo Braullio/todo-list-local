@@ -6,7 +6,7 @@
 </head>
 <body>
     <h1>Dados Armazenados</h1>
-    
+
     <div class="container">
         <div class="add-container">
             <h2>Regras</h2>
@@ -37,7 +37,16 @@
         </div>
     </div>
 
-<script src="script.js"></script>
-</br></br></br></br>
+    <br><br>
+    <h2 style="text-align: center;">Gerenciar Backup</h2>
+    <div class="button-container">
+        <label for="fileInput" class="custom-file-label">Selecionar Arquivo</label>
+        <input type="file" id="fileInput" accept=".json" onchange="importBackup()">
+
+        <button class="btn" onclick="downloadBackup()">Baixar JSON</button>
+    </div>
+
+    <script src="script.js"></script>
+    </br></br></br></br>
 </body>
 </html>

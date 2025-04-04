@@ -158,3 +158,55 @@ function removeTask(type, index) {
     currentEntity.save();
     displayData();
 }
+
+function importBackup() {
+    const fileInput = document.getElementById("fileInput");
+    const file = fileInput.files[0];
+
+    if (!file) {
+        alert("Por favor, selecione um arquivo JSON.");
+        return;
+    }
+
+    const reader = new FileReader();
+    reader.onload = function(event) {
+        try {
+            const importedData = JSON.parse(event.target.result);
+
+            localStorage.setItem("listData", JSON.stringify(importedData.listData || []));
+            localStorage.setItem("linksData", JSON.stringify(importedData.linksData || []));
+            localStorage.setItem("checkboxData", JSON.stringify(importedData.checkboxData || {}));
+
+            location.reload();
+        } catch (error) {
+            alert("Erro ao importar JSON. Verifique o arquivo.");
+        }
+    };
+    reader.readAsText(file);
+}
+
+function downloadBackup() {
+    const now = new Date();
+    const timestamp = now.getFullYear() +
+    String(now.getMonth() + 1).padStart(2, '0') +
+    String(now.getDate()).padStart(2, '0') +
+    String(now.getHours()).padStart(2, '0') +
+    String(now.getMinutes()).padStart(2, '0');
+
+    const fileName = `backup-${timestamp}.json`;
+
+    const listData = JSON.parse(localStorage.getItem(STORAGE_KEYS.LIST)) || [];
+    const linksData = JSON.parse(localStorage.getItem(STORAGE_KEYS.LINKS)) || [];
+    const checkboxData = JSON.parse(localStorage.getItem(STORAGE_KEYS.CHECKBOX)) || {};
+
+    const backupData = { listData, linksData, checkboxData };
+    const jsonData = JSON.stringify(backupData, null, 4);
+
+    const blob = new Blob([jsonData], { type: "application/json" });
+    const link = document.createElement("a");
+    link.href = URL.createObjectURL(blob);
+    link.download = fileName;
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+}
